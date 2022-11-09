@@ -4,6 +4,7 @@
 //bottone da cui genero la griglia
 const play_Btn = document.getElementById("play-btn");
 console.log(play_Btn);
+
 //select da cui recupero i valori della funzione generateGrid al play btn click
 const level_input = document.querySelector("select");
 console.log(level_input);
@@ -24,6 +25,8 @@ console.log(level_input);
  * @param {*} container_SelectorCSS selettore CSS del contenitore in cui generare la griglia
  */
 function generateGrid(rowCells_Number, container_SelectorCSS) {
+
+    /* prima di tutto  */
     //recupero gli elementi che mi servono
 
 
@@ -58,6 +61,7 @@ function generateGrid(rowCells_Number, container_SelectorCSS) {
 
     //recupero i valori che mi servono
 
+    /* come */
     //______________________________________________________controllo sulla validità del numero inserito
     //numero totale delle celle che mi servono
     const totalCells_Number = Math.pow(rowCells_Number, 2);
@@ -96,7 +100,7 @@ function generateGrid(rowCells_Number, container_SelectorCSS) {
             //con this, faccio riferimento all'elemento scatenante della funzione in cui è locato(this)
             //uin questo caso si riferisce a cell_El.
             //per mezzo di ciò sarà possibile  attribuire a tutte le cell del ciclo delle proprietà dinamiche 
-            
+
             //ora per tutte le mie celle, se clicco diventano azzurre________________________________anche classe personalizzata
             this.classList.add("bg-primary");
             this.classList.add("bg-opacity-50")
@@ -107,22 +111,19 @@ function generateGrid(rowCells_Number, container_SelectorCSS) {
         grid_El.append(cell_El);
         i++
     }
-
     console.log(this, "this in generateGrid");
 }
 
+play_Btn.addEventListener("click", function () {
 
+    const userLevelChoice = parseInt(level_input.value)
+    console.log(userLevelChoice);
 
-//try function
-generateGrid(3, ".col-10");
-
-
-
-play_Btn.addEventListener("clik", function () {
-
-    generateGrid(3, ".col-10");
-
-    level_input.value
-})
+    if (isNaN(userLevelChoice)) {
+        alert("Effettua una scelta!")
+        }else {
+            generateGrid(userLevelChoice, ".col-10");
+        }
+    })
 
 
