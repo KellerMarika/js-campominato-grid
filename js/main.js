@@ -39,7 +39,7 @@ function generateGrid(rowCells_Number, container_SelectorCSS) {
     /* Cosa: */
     //creo la griglia in cui inserirò le celle
     const grid_El = document.createElement("div");
-    console.log(grid_El);
+    //console.log(grid_El);
 
     //classe nominale parlante: ti dice già quante celle porta per riga (come bootstrap row-cols-x)
     const grid_ElName = `grid-cells-${rowCells_Number}`;
@@ -48,9 +48,13 @@ function generateGrid(rowCells_Number, container_SelectorCSS) {
     //aggiungo la classe d-flex perchè funzioni correttamente il flexbasis degli elementi figli
 
     //in questo modo ho pieno controllo sul corretto funzionamento della struttura che andrò a creare, perchè noin dipende da elementi esterni
-    grid_El.classList.add("d-flex");
 
+    //perchè funzioni correttamente il flexbasis delle celle occorre che l'elemento genitore in cui andrò ad inserire le celle abbia il display flex, ma lo faccio fuori dal ciclo ;
+    grid_El.style.display = "flex"
+    grid_El.style.flexWrap = "wrap"
 
+    //stampo la grid nell'elemento conenitori di cui abbiamo fornito il selettore css nell'argomento della funzione
+    container_El.append(grid_El);
 
     //recupero i valori che mi servono
 
@@ -67,31 +71,40 @@ function generateGrid(rowCells_Number, container_SelectorCSS) {
 
         //create piuttosto di innerHTML perchè così posso aggiungere degli eventi relativi all'elemento creato
         //creo la singola cella
-        const cel_El = document.createElement("div");
-        console.log(cel_El);
+        const cell_El = document.createElement("div");
+        console.log(cell_El);
 
         //creo classe nominale per cel el
-        const cel_ElName = `cel-${i + 1}`
-        //ggiungo la classe cel-ElName all'elemento creato sopra cel_El
-        cel_El.classList.add(cel_ElName);
+        const cell_ElName = `cell-${i + 1}`
+        //ggiungo la classe cell-ElName all'elemento creato sopra cell_El
+        cell_El.classList.add(cell_ElName);
 
         //ora determino le dimensioni dell'elemento grazie ad un calcolo basato sul primo argomento fornito alla funzione. poi lo assegno dando uno style inlinea ad ogni elemento:
         //calc = 100% (larghezza container) / (diviso) rowCells_Number (numero di celle volute per riga)
 
         //le proprietà in js sono tradotte da kebab-case a camel-case
-        cel_El.style.flexBasis = `calc(100% / ${rowCells_Number}`;
+        cell_El.style.flexBasis = `calc(100% / ${rowCells_Number}`;
+        //è una square grid____________________________________________anche solo css
+        cell_El.style.aspectRatio = `1/1`;
 
         //Ogni cella  contiene ha un numero progressivo, da 1 a totalCells_Number
-        cel_El.append(i + 1);
+        cell_El.append(i + 1);
 
         /* devo aggiungere l'evento */
+        cell_El.addEventListener("click", function () {
 
+            //con this, faccio riferimento all'elemento scatenante della funzione in cui è locato(this)
+            //uin questo caso si riferisce a cell_El.
+            //per mezzo di ciò sarà possibile  attribuire a tutte le cell del ciclo delle proprietà dinamiche 
+            
+            //ora per tutte le mie celle, se clicco diventano azzurre________________________________anche classe personalizzata
+            this.classList.add("bg-primary");
+            this.classList.add("bg-opacity-50")
+        })
 
-        //perchè funzioni correttamente il flexbasis delle celle occorre che l'elemento genitore in cui andrò ad inserire le celle abbia il display flex, ma lo faccio fuori dal ciclo ;
-
-
-
-
+        //adesso stampo la cel sull'html. 
+        //ad ogni ciclo ne innesto una nella grid che abbiamo innestato nel container 
+        grid_El.append(cell_El);
         i++
     }
 
