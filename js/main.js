@@ -21,16 +21,20 @@ console.log(level_input);
  * (RowCols_Number^seconda) .
  * essa viene creata all'interno dell'elemento che ha per selettore il valore specificato nel secondo argomento
  * @param {number} rowCells_Number numero di colonne per riga
- * @param {*} HTMLselectorContainer selettore html del contenitore in cui generare la griglia
+ * @param {*} container_SelectorCSS selettore CSS del contenitore in cui generare la griglia
  */
-function generateGrid(rowCells_Number, HTMLselectorContainer) {
+function generateGrid(rowCells_Number,container_SelectorCSS) {
     //recupero gli elementi che mi servono
 
+    //creo una variabile che ha al suo interno l'elemento che ha per selettore css il valore espresso nel secondo argomento della funzione
+    const container_El= document.querySelector(container_SelectorCSS);
+    console.log("container_El", container_El);
 
-    /*  let HTMLselectorContainer= document.querySelector("HTMLselectorContainer") ___________________________________________________________________________riguardaci non si fa così*/
+    //______________________________________________________controllo sulla validità dell'elemento
 
     //recupero i valori che mi servono
 
+    //______________________________________________________controllo sulla validità del numero inserito
     //numero totale delle celle che mi servono
     const totalCells_Number = Math.pow(rowCells_Number, 2);
     console.log("totalCells_Number", totalCells_Number);
@@ -64,13 +68,13 @@ function generateGrid(rowCells_Number, HTMLselectorContainer) {
 }
 
 //try function
-generateGrid(3, "col-10");
+generateGrid(3, ".col-10");
 
 
 
 play_Btn.addEventListener("clik", function () {
 
-    generateGrid(3, "col-10");
+    generateGrid(3, ".col-10");
 
     level_input.value
 })
