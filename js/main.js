@@ -23,14 +23,34 @@ console.log(level_input);
  * @param {number} rowCells_Number numero di colonne per riga
  * @param {*} container_SelectorCSS selettore CSS del contenitore in cui generare la griglia
  */
-function generateGrid(rowCells_Number,container_SelectorCSS) {
+function generateGrid(rowCells_Number, container_SelectorCSS) {
     //recupero gli elementi che mi servono
 
+
+    /*Dove:*/
+    //Rilevazione contenitore 
     //creo una variabile che ha al suo interno l'elemento che ha per selettore css il valore espresso nel secondo argomento della funzione
-    const container_El= document.querySelector(container_SelectorCSS);
+    const container_El = document.querySelector(container_SelectorCSS);
     console.log("container_El", container_El);
 
     //______________________________________________________controllo sulla validità dell'elemento
+
+
+    /* Cosa: */
+    //creo la griglia in cui inserirò le celle
+    const grid_El = document.createElement("div");
+    console.log(grid_El);
+
+    //classe nominale parlante: ti dice già quante celle porta per riga (come bootstrap row-cols-x)
+    const grid_ElName = `grid-cells-${rowCells_Number}`;
+
+    grid_El.classList.add(grid_ElName);
+    //aggiungo la classe d-flex perchè funzioni correttamente il flexbasis degli elementi figli
+
+    //in questo modo ho pieno controllo sul corretto funzionamento della struttura che andrò a creare, perchè noin dipende da elementi esterni
+    grid_El.classList.add("d-flex");
+
+
 
     //recupero i valori che mi servono
 
@@ -59,13 +79,26 @@ function generateGrid(rowCells_Number,container_SelectorCSS) {
         //calc = 100% (larghezza container) / (diviso) rowCells_Number (numero di celle volute per riga)
 
         //le proprietà in js sono tradotte da kebab-case a camel-case
-        cel_El.style.flexBasis=`calc(100% / ${rowCells_Number}`;
+        cel_El.style.flexBasis = `calc(100% / ${rowCells_Number}`;
+
+        //Ogni cella  contiene ha un numero progressivo, da 1 a totalCells_Number
+        cel_El.append(i + 1);
+
+        /* devo aggiungere l'evento */
+
+
+        //perchè funzioni correttamente il flexbasis delle celle occorre che l'elemento genitore in cui andrò ad inserire le celle abbia il display flex, ma lo faccio fuori dal ciclo ;
+
+
+
 
         i++
     }
 
     console.log(this, "this in generateGrid");
 }
+
+
 
 //try function
 generateGrid(3, ".col-10");
