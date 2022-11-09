@@ -33,19 +33,34 @@ function generateGrid(rowCells_Number, HTMLselectorContainer) {
 
     //numero totale delle celle che mi servono
     const totalCells_Number = Math.pow(rowCells_Number, 2);
-    console.log("totalCells_Number",totalCells_Number);
+    console.log("totalCells_Number", totalCells_Number);
 
     //ciclo di creazione (perchè non while?)
     //finchè i non è uguale al numero di celle totali da creare
-    i=0
+    i = 0
     while (i < totalCells_Number) {
         console.log(i)
+
         //create piuttosto di innerHTML perchè così posso aggiungere degli eventi relativi all'elemento creato
+        //creo la singola cella
+        const cel_El = document.createElement("div");
+        console.log(cel_El);
+
+        //creo classe nominale per cel el
+        const cel_ElName = `cel-${i + 1}`
+        //ggiungo la classe cel-ElName all'elemento creato sopra cel_El
+        cel_El.classList.add(cel_ElName);
+
+        //ora determino le dimensioni dell'elemento grazie ad un calcolo basato sul primo argomento fornito alla funzione. poi lo assegno dando uno style inlinea ad ogni elemento:
+        //calc = 100% (larghezza container) / (diviso) rowCells_Number (numero di celle volute per riga)
+
+        //le proprietà in js sono tradotte da kebab-case a camel-case
+        cel_El.style.flexBasis=`calc(100% / ${rowCells_Number}`;
 
         i++
     }
 
-    console.log(this, "this in generateGrid")
+    console.log(this, "this in generateGrid");
 }
 
 //try function
