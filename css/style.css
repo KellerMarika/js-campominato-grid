@@ -64,7 +64,7 @@ text-shadow: -3px 3px  rgb(148, 138, 138);
 [class*="cell-"].active {
     background-image: url(/img/cell-click-bg.jpg);
     background-size: cover;
-    border: 5px inset #d5d5d5c9;
+    border: none
 }
 
 [class*="cell-"] {
