@@ -15,7 +15,7 @@ console.log(level_input);
 
 //const level_input.value________in play btn click f
 
-/************* FUNZIONI *****************/
+/************* FUNZIONE GENERA GRIGLIA *****************/
 
 /**
  * funzione che utilizza il numero inserito come primo argomento per costuire una griglia quadrata
@@ -38,6 +38,9 @@ function generateGrid(rowCells_Number, container_SelectorCSS) {
 
     //______________________________________________________controllo sulla validità dell'elemento
 
+    /* reset iniziale */
+    container_El.innerHTML = ""
+
 
     /* Cosa: */
     //creo la griglia in cui inserirò le celle
@@ -55,6 +58,7 @@ function generateGrid(rowCells_Number, container_SelectorCSS) {
     //perchè funzioni correttamente il flexbasis delle celle occorre che l'elemento genitore in cui andrò ad inserire le celle abbia il display flex, ma lo faccio fuori dal ciclo ;
     grid_El.style.display = "flex"
     grid_El.style.flexWrap = "wrap"
+    grid_El.classList.add("my_b-inset")
 
     //stampo la grid nell'elemento conenitori di cui abbiamo fornito il selettore css nell'argomento della funzione
     container_El.append(grid_El);
@@ -88,9 +92,6 @@ function generateGrid(rowCells_Number, container_SelectorCSS) {
 
         //le proprietà in js sono tradotte da kebab-case a camel-case
         cell_El.style.flexBasis = `calc(100% / ${rowCells_Number}`;
-        //è una square grid____________________________________________anche solo css
-        cell_El.style.aspectRatio = `1/1`;
-
         //Ogni cella  contiene ha un numero progressivo, da 1 a totalCells_Number
         cell_El.append(i + 1);
 
@@ -102,9 +103,9 @@ function generateGrid(rowCells_Number, container_SelectorCSS) {
             //per mezzo di ciò sarà possibile  attribuire a tutte le cell del ciclo delle proprietà dinamiche 
 
             //ora per tutte le mie celle, se clicco diventano azzurre________________________________anche classe personalizzata
-            this.classList.add("bg-primary");
-            this.classList.add("bg-opacity-50")
-        })
+            this.classList.add("active");
+
+        });
 
         //adesso stampo la cel sull'html. 
         //ad ogni ciclo ne innesto una nella grid che abbiamo innestato nel container 
@@ -114,16 +115,20 @@ function generateGrid(rowCells_Number, container_SelectorCSS) {
     console.log(this, "this in generateGrid");
 }
 
+
+/*** PLAY BTN *******************************/
+
 play_Btn.addEventListener("click", function () {
+
 
     const userLevelChoice = parseInt(level_input.value)
     console.log(userLevelChoice);
 
     if (isNaN(userLevelChoice)) {
         alert("Effettua una scelta!")
-        }else {
-            generateGrid(userLevelChoice, ".col-10");
-        }
-    })
+    } else {
+        generateGrid(userLevelChoice, ".col-10");
+    }
+});
 
 
